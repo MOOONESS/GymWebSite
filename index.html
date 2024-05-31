@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Serial Data Stream</title>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const eventSource = new EventSource('http://localhost:8000/events');
+
+    eventSource.onmessage = function(event) {
+        console.log("New data:", event.data);
+        document.getElementById('dataDisplay').textContent = event.data;
+    };
+
+    eventSource.onerror = function(event) {
+        console.error('EventSource failed:', event);
+    };
+});
+</script>
+</head>
+<body>
+    <h1>Real-Time Serial Data</h1>
+    <p id="dataDisplay">Waiting for data...</p>
+</body>
+</html>
